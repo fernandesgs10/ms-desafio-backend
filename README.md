@@ -1,22 +1,25 @@
-Internet Services Architectures
-Project contains examples for Internet Services Architectures classes conducted to crud project
-
+Micro Services Architectures Project
+This project contains practical examples for the Internet Services Architectures course, including a CRUD application.
 Requirements
-The list of tools required to build and run the project:
 
-Open JDK 17.x+
-Apache Maven 3.9.x+
+To build and run the project, you will need the following tools:
 
-Building
-In order to build project use:
-mvn spring-boot:run in directory application
+    OpenJDK 17.x or higher
+    Apache Maven 3.9.x or higher
+
+Building the Project
+
+To build and run the project, navigate to the application directory and execute the following command:
+
+docker-compose up
 
 License
-Project is licensed under the MIT license.
 
+This project is licensed under the MIT License.
 Credits
-All character's portraits were created using DMHeroes developed by
-Fernandes Silva.
 
+All character portraits were created using DMHeroes, developed by Fernandes Silva.
 Author
-Copyright © 2023, Fgs
+
+Copyright © 2024
+Fgs
