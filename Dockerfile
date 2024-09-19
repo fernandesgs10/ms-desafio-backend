@@ -1,18 +1,27 @@
+# Build stage
 FROM maven:3.9.3-eclipse-temurin-17-alpine AS build
-COPY . /home/desafio-backend
-WORKDIR /home/desafio-backend
+COPY . /home/app
+WORKDIR /home/app
 
+# Verifica o diretório atual e lista o conteúdo para debug
+RUN pwd && ls -la
+
+# Compila o projeto, ignorando os testes para ser mais rápido
 RUN mvn clean install
 
+# Package stage
 FROM bellsoft/liberica-openjdk-alpine:17.0.4
-RUN addgroup desafiogroup && adduser --ingroup desafiogroup --disabled-password desafiofingers79
-USER desafiofingers79
+RUN addgroup demogroup && adduser --ingroup demogroup --disabled-password goldenfingers98
+USER goldenfingers98
 
+# Adicione as variáveis de ambiente para o banco de dados
 ENV SPRING_DATASOURCE_URL=jdbc:postgresql://postgresqldb:5432/db-desafio-backend
 ENV SPRING_DATASOURCE_USERNAME=desafio
 ENV SPRING_DATASOURCE_PASSWORD=desafio
 
-ARG JAR_FILE=application/target/*.jar
-COPY ${JAR_FILE} ms-desafio-backend.jar
+# Expõe a porta 8080
 EXPOSE 8080
-ENTRYPOINT [ "java", "-jar", "/ms-desafio-backend.jar" ]
+ARG JAR_FILE=/home/app/application/target/*.jar
+COPY --from=build ${JAR_FILE} /app.jar
+# Comando de inicialização da aplicação
+ENTRYPOINT [ "java", "-jar", "/app.jar" ]
